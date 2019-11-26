@@ -12,11 +12,6 @@ public class Checking extends Account {
 		public float getMonthlyEnd() {
 			return balance * (3 * (transaction - 2 ));
 		}
-		
-		public String toString() {
-			String output = super.toString();
-				
-				return output;
-		}
-		}
+	
+}
 		

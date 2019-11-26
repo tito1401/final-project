@@ -13,11 +13,5 @@ public class Regular extends Account {
 		return (balance * 1.06f) - 10;
 	}
 	
-	
-	public String toString() {
-		String output = super.toString();
-		
-		return output;
-	}
 }
 	
