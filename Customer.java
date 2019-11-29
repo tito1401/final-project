@@ -29,8 +29,8 @@ public class Customer {
 			return customerID;
 		}
 		public String toString() {
-			String output = "Customer name: " + name;
-			output += "\nCustomer ID: " + customerID;
+			String output = "Customer name: " + this.name;
+			output += "\nCustomer ID: " + this.customerID + "\n";
 			
 			return output;
 		}

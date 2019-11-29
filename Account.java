@@ -8,7 +8,6 @@ public class Account {
 
     //getter so account info can be referenced elsewhere
     public Account(Customer customer, int accountNumber, float balance, int transaction) {
-        super();
         this.customer = customer;
         this.accountNumber = accountNumber;
         this.balance = balance;
@@ -49,13 +48,4 @@ public class Account {
     	return customer;
     }
     
-    //to string method for Account class
-    public String toString() {
-    	String output = "Customer Name: " + this.customer.getName();
-    	output += "Customer ID: " + this.customer.getCustomerID();
-    	output += "Account Number: " + this.accountNumber;
-    	output += "\n Balance: " + this.balance + "\n";
-    	
-    	return output;
-    }
 }

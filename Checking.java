@@ -10,8 +10,21 @@ public class Checking extends Account {
 		}
 		
 		public float getMonthlyEnd() {
-			return balance * (3 * (transaction - 2 ));
+			if (this.transaction <= 2) {
+				return balance;
+			}
+			else {
+			return balance - (3 * (transaction - 2 ));
 		}
-	
+	}
+		//to string method for Account class
+	    public String toString() {
+	    	String output = this.customer.toString();
+	    	output += "Account Number: " + this.accountNumber;
+	    	output += "\nBalance: " + this.balance + "\n";
+	    	output += "\nTransactions this month: " + this.transaction + "\n";
+	    	
+	    	return output;
+	}
 }
 		
