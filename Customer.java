@@ -1,7 +1,6 @@
 public class Customer {
 	protected String name;
 	protected int customerID;
-	protected Customer customer;
 	
 	public Customer(String name, int customerID) {
 		this.name = name;

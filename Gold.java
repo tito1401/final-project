@@ -13,9 +13,4 @@ public class Gold extends Account {
 		return (balance * 1.05f);
 	}
 	
-	public String toString() {
-		String output = super.toString();
-		
-		return output;
-	}
 }

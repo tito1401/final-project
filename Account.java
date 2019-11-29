@@ -28,6 +28,9 @@ public class Account {
     public void setMonthlyEnd ( float monthlyEnd ) {
     	this.monthlyEnd = monthlyEnd;
     }
+    public void setCustomer ( Customer customer ) {
+    	this.customer = customer;
+    }
     
     //getters for attributes
     public int getAccountNumber() {
@@ -42,10 +45,14 @@ public class Account {
     public float getMonthlyEnd() {
     	return balance;
     }
+    public Customer getCustomer() {
+    	return customer;
+    }
     
     //to string method for Account class
     public String toString() {
-    	String output = this.customer.toString();
+    	String output = "Customer Name: " + this.customer.getName();
+    	output += "Customer ID: " + this.customer.getCustomerID();
     	output += "Account Number: " + this.accountNumber;
     	output += "\n Balance: " + this.balance + "\n";
     	

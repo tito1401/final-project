@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//latest file, uploaded 11/24
+
+//latest file for final project
+//uploaded to github 11/24
 //BankSystem class
 public class Bank {
     public Scanner input = new Scanner(System.in);
     
-    public ArrayList<Account> arrayList = new ArrayList<Account>();
+    public ArrayList<Account> arrayList = new ArrayList<>();
     
   //method to create checking account
     public Checking createChecking() {
@@ -75,7 +77,7 @@ public class Bank {
         customerID = input.nextInt();
 
         //create new customer from provided data
-        Customer customer= new Customer(name,customerID);
+        Customer customer= new Customer(name, customerID);
 
         //return new Customer object
         return customer;
@@ -127,9 +129,9 @@ public class Bank {
 
 
     //method to find accounts based on account number
-    public Account find(int accountNumber) {
+    public Account find(int accountNO) {
        for (Account acc:arrayList) {
-    	   if (acc.getAccountNumber() == (accountNumber))
+    	   if (acc.getAccountNumber() == (accountNO))
             return acc;
         }
        {
@@ -140,8 +142,7 @@ public class Bank {
     //method to add deposit
     void addDeposit() {
     	Account acc;
-    	System.out.println("Enter customer account number: ");
-    	int accountNO = input.nextInt();
+    	int accountNO = searchAccount();
     	acc = find(accountNO);
     		if (acc == null) {
     			System.out.println("Account number not found."); }
@@ -152,11 +153,10 @@ public class Bank {
     	    	System.out.println("Account updated.");
     	    	}
     		}
-    	//method to withdraw
+    //method to withdraw
     void subWithdraw() {
     	Account acc;
-    	System.out.println("Enter customer account number: ");
-    	int accountNO = input.nextInt();
+    	int accountNO = searchAccount();
     	acc = find(accountNO);
     		if (acc == null) {
     			System.out.println("Account number not found. "); }
@@ -167,7 +167,25 @@ public class Bank {
     		System.out.println("Account updated. ");
     		}
     }
+    
+   //method to input customer account number for searching purposes 
+    public int searchAccount() {
+    	System.out.println("Enter customer account number: ");
+    	int accountNO = input.nextInt();
+    	
+    	return accountNO;
+    }
+    
+    //method to display account info
+    public void displayInfo(int accountNO){
 
+        //match accountNO from input to Account it belongs to
+        for (Account acc:arrayList) {
+            if (acc.getAccountNumber() == (accountNO)) {
+                System.out.println(acc);
+            }
+        }
+    }
     public static void main(String[] args) {
         Bank bankOperator = new Bank();
         int choice;
@@ -220,22 +238,17 @@ public class Bank {
                     
                 //display account info    
         		case 6:
-        			bankOperator.arrayList.forEach((Account) -> {
-                		System.out.println(Account);
-                	});
+        			int accountNO = 0;
+        			Account acc;
         			
-                    //System.out.println("Please input the account number: ");
-                    //accountNO = bankOperator.input.nextInt();
-                    //acc = find(accountNO);
-                	//if (acc == null) {	
-                	//	System.out.println("\nAccount number not found"); }
-                	//else {
-                    
-                      //      System.out.println("Account number " + arrayList.get(acc.getAccountNumber()).accountNumber);
-                        //    System.out.println("Customer Name " + arrayList.get(acc.getAccountNumber()).customerName);
-                          //  System.out.println("Account type " + arrayList.get(acc.getAccountNumber()).accountType);
-                            //System.out.println("Balance " + arrayList.get(acc.getAccountNumber()).balance);
-                            //System.out.println("Customer ID " + arrayList.get(acc.getAccountNumber()).customerID);                                  
+        			accountNO = bankOperator.searchAccount();
+        			acc = bankOperator.find(accountNO);
+        			if (acc == null) {
+            			System.out.println("Account number not found. "); }
+            		else { 
+            			bankOperator.displayInfo(accountNO);
+            		}
+                     
                     break;
                     
                 //remove an account
