@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 //latest file for final project
-//uploaded to github 11/24
+//uploaded to github 12/8
 //BankSystem class
 public class Bank {
     public Scanner input = new Scanner(System.in);
@@ -123,7 +123,7 @@ public class Bank {
         }
 
         //display largest account holder
-        //largestBalance = arrayList.get(arrayList.size() - 1).customerName;
+        //largestBalance = arrayList.get(arrayList.size() - 1).Customer.name;
         //System.out.println("The account with largest balance: " + largestBalance);
 
     }
@@ -148,28 +148,42 @@ public class Bank {
     		if (acc == null) {
     			System.out.println("Account number not found."); }
     		else {
-    			System.out.println("Enter amount to deposit: ");
+    			System.out.println("Enter amount to deposit: $");
     				float deposit = input.nextFloat();
     	    		acc.balance += deposit;	
     	    		acc.transaction += 1;
     	    	System.out.println("Account updated.");
     	    	}
     		}
-    //method to withdraw
+    
+    //method to withdraw 
     void subWithdraw() {
     	Account acc;
     	int accountNO = searchAccount();
     	acc = find(accountNO);
     		if (acc == null) {
-    			System.out.println("Account number not found. "); }
-    		else {
-    			System.out.println("Enter amount to withdraw: ");
+    			System.out.println("Account number not found. "); 
+    			}
+    		if (acc instanceof Gold) {
+    			System.out.println("Enter amount to withdraw: $");
     			float withdraw = input.nextFloat();
     			acc.balance -= withdraw;
-    			acc.transaction += 1;
+    			}
+    		else {
+    			System.out.println("Enter amount to withdraw: $");
+    			float withdraw = input.nextFloat();
+    			if (withdraw <= acc.balance) { 
+    				acc.balance -= withdraw;
+    				}
+    			else {
+    				System.out.println("You were only able to withdraw: $" + acc.balance);
+    				acc.balance = 0;
+    				}
+    			}
+    		acc.transaction += 1;	
     		System.out.println("Account updated. ");
-    		}
-    }
+    	}
+    
     
    //method to input customer account number for searching purposes 
     public int searchAccount() {
