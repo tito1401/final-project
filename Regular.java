@@ -13,11 +13,13 @@ public class Regular extends Account {
 		return (balance * 1.06f) - 10;
 	}
 	
-	
-	public String toString() {
-		String output = super.toString();
-		
-		return output;
-	}
+	//to string method for Account class
+    public String toString() {
+    	String output = this.customer.toString();
+    	output += "Account Number: " + this.accountNumber;
+    	output += "\nBalance: " + this.balance + "\n";
+    	
+    	return output;
+    }
 }
 	

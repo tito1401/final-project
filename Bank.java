@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//latest file, uploaded 11/24
+
+//latest file for final project
+//uploaded to github 11/24
 //BankSystem class
 public class Bank {
     public Scanner input = new Scanner(System.in);
     
-    public ArrayList<Account> arrayList = new ArrayList<Account>();
+    public ArrayList<Account> arrayList = new ArrayList<>();
     
   //method to create checking account
     public Checking createChecking() {
@@ -15,12 +17,13 @@ public class Bank {
             float balance = 0;
             int transaction = 0;
             
-            getCustomer();      
-                        
-            Checking checking = new Checking(customer, accountNumber, balance, transaction);
-            
-            System.out.println("Please input the account number: ");
+            customer = getCustomer();      
+                                   
+            System.out.println("\nPlease input the account number: ");
             accountNumber = input.nextInt();
+            
+            Checking checking = new Checking(customer, accountNumber, balance, transaction);
+
             
             return checking;         
     }
@@ -32,13 +35,13 @@ public class Bank {
             float balance = 0;
             int transaction = 0;
             
-            getCustomer();
-                                    
-            Gold gold = new Gold(customer, accountNumber, balance, transaction);
-            
-            System.out.println("Please input the account number: ");
+            customer = getCustomer();
+                                                
+            System.out.println("\nPlease input the account number: ");
             accountNumber = input.nextInt();
             
+            Gold gold = new Gold(customer, accountNumber, balance, transaction);
+
             return gold;
     }
     
@@ -49,9 +52,9 @@ public class Bank {
             float balance = 0;
             int transaction = 0;
             
-            getCustomer();
+            customer = getCustomer();
                         
-            System.out.println("Please input the account number: ");
+            System.out.println("\nPlease input the account number: ");
             accountNumber = input.nextInt();
             
             Regular regular = new Regular (customer, accountNumber, balance, transaction);
@@ -61,7 +64,7 @@ public class Bank {
     } 
            
     //method to request information about a customer and return customer
-    public Customer getCustomer() {
+    public static Customer getCustomer() {
         //declare string types needed to construct customer object
         String name = "";
         int customerID = 0;
@@ -75,7 +78,7 @@ public class Bank {
         customerID = input.nextInt();
 
         //create new customer from provided data
-        Customer customer= new Customer(name,customerID);
+        Customer customer= new Customer(name, customerID);
 
         //return new Customer object
         return customer;
@@ -127,9 +130,9 @@ public class Bank {
 
 
     //method to find accounts based on account number
-    public Account find(int accountNumber) {
-       for (Account acc:arrayList) {
-    	   if (acc.getAccountNumber() == (accountNumber))
+    public Account find(int accountNO) {
+       for (Account acc:this.arrayList) {
+    	   if (acc.getAccountNumber() == (accountNO))
             return acc;
         }
        {
@@ -140,8 +143,7 @@ public class Bank {
     //method to add deposit
     void addDeposit() {
     	Account acc;
-    	System.out.println("Enter customer account number: ");
-    	int accountNO = input.nextInt();
+    	int accountNO = searchAccount();
     	acc = find(accountNO);
     		if (acc == null) {
     			System.out.println("Account number not found."); }
@@ -149,25 +151,44 @@ public class Bank {
     			System.out.println("Enter amount to deposit: ");
     				float deposit = input.nextFloat();
     	    		acc.balance += deposit;	
+    	    		acc.transaction += 1;
     	    	System.out.println("Account updated.");
     	    	}
     		}
-    	//method to withdraw
+    //method to withdraw
     void subWithdraw() {
     	Account acc;
-    	System.out.println("Enter customer account number: ");
-    	int accountNO = input.nextInt();
+    	int accountNO = searchAccount();
     	acc = find(accountNO);
     		if (acc == null) {
     			System.out.println("Account number not found. "); }
     		else {
     			System.out.println("Enter amount to withdraw: ");
     			float withdraw = input.nextFloat();
-    			acc.balance += withdraw;
+    			acc.balance -= withdraw;
+    			acc.transaction += 1;
     		System.out.println("Account updated. ");
     		}
     }
+    
+   //method to input customer account number for searching purposes 
+    public int searchAccount() {
+    	System.out.println("Enter customer account number: ");
+    	int accountNO = input.nextInt();
+    	
+    	return accountNO;
+    }
+    
+    //method to display account info
+    public void displayInfo(int accountNO){
 
+        //match accountNO from input to Account it belongs to
+        for (Account acc:arrayList) {
+            if (acc.getAccountNumber() == (accountNO)) {
+                System.out.println(acc);
+            }
+        }
+    }
     public static void main(String[] args) {
         Bank bankOperator = new Bank();
         int choice;
@@ -182,10 +203,10 @@ public class Bank {
                     + "5.Withdraw\n"
                     + "6.Display account info.\n"
                     + "7.Remove an account\n"
-                    + "8.Apply end of month <Interest/Fees>\n"
+                    + "8.Apply end of month Interest/Fees\n"
                     + "9.Display Bank statistics\n"
                     + "10.Exit\n"
-                    + "Please input your choice <1-10>: ");
+                    + "\nPlease input your choice <1-10>: ");
 
             choice = bankOperator.input.nextInt();
             switch (choice) {
@@ -220,35 +241,30 @@ public class Bank {
                     
                 //display account info    
         		case 6:
-        			bankOperator.arrayList.forEach((Account) -> {
-                		System.out.println(Account);
-                	});
+        			int accountNO = 0;
+        			Account acc;
         			
-                    //System.out.println("Please input the account number: ");
-                    //accountNO = bankOperator.input.nextInt();
-                    //acc = find(accountNO);
-                	//if (acc == null) {	
-                	//	System.out.println("\nAccount number not found"); }
-                	//else {
-                    
-                      //      System.out.println("Account number " + arrayList.get(acc.getAccountNumber()).accountNumber);
-                        //    System.out.println("Customer Name " + arrayList.get(acc.getAccountNumber()).customerName);
-                          //  System.out.println("Account type " + arrayList.get(acc.getAccountNumber()).accountType);
-                            //System.out.println("Balance " + arrayList.get(acc.getAccountNumber()).balance);
-                            //System.out.println("Customer ID " + arrayList.get(acc.getAccountNumber()).customerID);                                  
+        			accountNO = bankOperator.searchAccount();
+        			acc = bankOperator.find(accountNO);
+        			if (acc == null) {
+            			System.out.println("Account number not found. "); }
+            		else { 
+            			bankOperator.displayInfo(accountNO);
+            		}
+                     
                     break;
                     
                 //remove an account
                 case 7:
-                    //System.out.println("Please input the account number: ");
-                    //accountNO = bankOperator.input.nextInt();
-                    //acc = bankOperator.find(accountNO);
-                	//if (acc == null) {	
-                	//	System.out.println("\nAccount number not found"); }
-                	//else {
-                	//	bankOperator.arrayList.remove(acc);
-                      //      System.out.println("Bank account removed");
-
+                    
+                    accountNO = bankOperator.searchAccount();
+                    acc = bankOperator.find(accountNO);
+                	if (acc == null) {	
+                		System.out.println("/nAccount number not found"); }
+                	else {
+                		bankOperator.arrayList.remove(acc);
+                        System.out.println("Bank account removed");
+                	}
                     break;
 
                 //Apply end of the month interest/fees
@@ -269,8 +285,8 @@ public class Bank {
                     bankOperator.displayBankStatistics();
                     break;
             }
-        } while (choice != 10);
 
+        } while (choice != 10);
 
     }
 
