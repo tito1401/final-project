@@ -13,18 +13,10 @@ import java.io.Serializable;
 public class Bank implements Serializable {
     public Scanner input = new Scanner(System.in);
     
+    //create arraylist 
     public ArrayList<Account> arrayList = new ArrayList<>();
     
-  //method to check for unique account
-    public boolean accountCheck(int accountNumber) {
-    	       for (Account acc:this.arrayList) {
-    	    	   if (acc.getAccountNumber() == (accountNumber))
-    	            return true;
-    	        }
-    	       		return false;
-    }
-    
-  //method to create checking account
+    //method to create checking account
     public Checking createChecking() {
             Customer customer = null;
             int accountNumber = 0;
@@ -35,16 +27,17 @@ public class Bank implements Serializable {
                                    
             System.out.println("\nPlease input the account number: ");
             accountNumber = input.nextInt();
-            while (accountCheck(accountNumber)); { 
+            while (accountCheck((accountNumber))) {
             	System.out.println("\nThis account number is already taken.");
-            	System.out.println("\nEnter a different account number: ");
-            	accountNumber = input.nextInt();
+       			System.out.println("\nEnter a different account number: ");
+       			accountNumber = input.nextInt();
             }
-            	Checking checking = new Checking(customer, accountNumber, balance, transaction);
-            	return checking;
+
+            Checking checking = new Checking(customer, accountNumber, balance, transaction);
+            return checking;
             }
     
-  //method to create gold account
+    //method to create gold account
     public Gold createGold() {
             Customer customer = null;
             int accountNumber = 0;
@@ -55,13 +48,18 @@ public class Bank implements Serializable {
                                                 
             System.out.println("\nPlease input the account number: ");
             accountNumber = input.nextInt();
+            while (accountCheck((accountNumber))) {
+            	System.out.println("\nThis account number is already taken.");
+       			System.out.println("\nEnter a different account number: ");
+       			accountNumber = input.nextInt();
+            }
             
             Gold gold = new Gold(customer, accountNumber, balance, transaction);
 
             return gold;
     }
     
-  //method to create regular account
+    //method to create regular account
     public Regular createRegular() {
     		Customer customer = null;
             int accountNumber;
@@ -72,6 +70,11 @@ public class Bank implements Serializable {
                         
             System.out.println("\nPlease input the account number: ");
             accountNumber = input.nextInt();
+            while (accountCheck((accountNumber))) {
+            	System.out.println("\nThis account number is already taken.");
+       			System.out.println("\nEnter a different account number: ");
+       			accountNumber = input.nextInt();
+            }
             
             Regular regular = new Regular (customer, accountNumber, balance, transaction);
 
@@ -155,6 +158,16 @@ public class Bank implements Serializable {
     	   return null;
        }
        }
+    
+  //method to check for unique account
+    public boolean accountCheck(int accountNumber) {
+    	       for (Account acc:this.arrayList) {
+    	    	   if (acc.getAccountNumber()==(accountNumber)) {
+    	    		   return true;
+    	    	   }
+    	       }
+			return false;
+    }
     
     //method to add deposit
     void addDeposit() {
@@ -302,7 +315,7 @@ public class Bank implements Serializable {
         			accountNO = bankOperator.searchAccount();
         			acc = bankOperator.find(accountNO);
         			if (acc == null) {
-            			System.out.println("Account number not found. "); }
+            			System.out.println("Account number not found."); }
             		else { 
             			bankOperator.displayInfo(accountNO);
             		}
