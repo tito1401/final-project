@@ -1,4 +1,6 @@
-public class Gold extends Account {
+import java.io.Serializable;
+
+public class Gold extends Account implements Serializable {
 
 	
 	public Gold (Customer customer, int accountNumber, float balance, int transaction) {

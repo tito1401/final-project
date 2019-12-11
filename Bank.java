@@ -1,14 +1,28 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
 //latest file for final project
 //uploaded to github 12/8
 //BankSystem class
-public class Bank {
+public class Bank implements Serializable {
     public Scanner input = new Scanner(System.in);
     
     public ArrayList<Account> arrayList = new ArrayList<>();
+    
+  //method to check for unique account
+    public boolean accountCheck(int accountNumber) {
+    	       for (Account acc:this.arrayList) {
+    	    	   if (acc.getAccountNumber() == (accountNumber))
+    	            return true;
+    	        }
+    	       		return false;
+    }
     
   //method to create checking account
     public Checking createChecking() {
@@ -21,12 +35,14 @@ public class Bank {
                                    
             System.out.println("\nPlease input the account number: ");
             accountNumber = input.nextInt();
-            
-            Checking checking = new Checking(customer, accountNumber, balance, transaction);
-
-            
-            return checking;         
-    }
+            while (accountCheck(accountNumber)); { 
+            	System.out.println("\nThis account number is already taken.");
+            	System.out.println("\nEnter a different account number: ");
+            	accountNumber = input.nextInt();
+            }
+            	Checking checking = new Checking(customer, accountNumber, balance, transaction);
+            	return checking;
+            }
     
   //method to create gold account
     public Gold createGold() {
@@ -84,7 +100,7 @@ public class Bank {
         return customer;
     }
     
-    //show banking statistics for a given account
+    //show banking statistics for all accounts
     void displayBankStatistics() {
         //declare variables
         float averageBalance = 0;
@@ -203,9 +219,31 @@ public class Bank {
             }
         }
     }
+    
+    //enter main
     public static void main(String[] args) {
         Bank bankOperator = new Bank();
         int choice;
+        
+        //file system 
+        final String FILENAME = "bank.dat";
+        File f = new File(FILENAME);
+        
+        		//try to load existing data
+        		if (f.exists()) {
+     			   try {
+     				ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
+     				//Read the objects from the file back to the array list
+     				bankOperator.arrayList = (ArrayList<Account>) in.readObject();
+     				in.close();
+
+     			   } catch (Exception e) {
+
+     			 		 System.out.println( e.getMessage() );
+     			 		 e.printStackTrace();
+     			 		 System.exit(0);
+     			 	}
+        		}
 
         do {
             System.out.println("     BANK MENU\n"
@@ -229,18 +267,21 @@ public class Bank {
                 case 1:
                     Checking check = bankOperator.createChecking();
                     bankOperator.arrayList.add(check);
+                    System.out.println("\nNew account created.");
                     	break;
 
                 //create gold account
                 case 2:
                     Gold g = bankOperator.createGold();
                     bankOperator.arrayList.add(g);
+                    System.out.println("\nNew account created.");
                     	break;
 
                 //create regular account
                 case 3:
                     Regular reg = bankOperator.createRegular();
                     bankOperator.arrayList.add(reg);
+                    System.out.println("\nNew account created.");
                     	break;
 
                 //deposit
@@ -301,7 +342,19 @@ public class Bank {
             }
 
         } while (choice != 10);
-
+      //save arraylist to file
+		try {
+			//Create the file then save all employee records into it
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(f));
+			out.writeObject(bankOperator.arrayList);
+			out.close();
+		}
+		catch (Exception e) {
+			System.out.println("Unable to bank information");
+			System.out.println( e.getMessage() );
+			e.printStackTrace();
+			System.exit(0);
+		}
     }
 
 

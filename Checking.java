@@ -1,4 +1,6 @@
-public class Checking extends Account {
+import java.io.Serializable;
+
+public class Checking extends Account implements Serializable {
 	
 		
 		public Checking (Customer customer, int accountNumber, float balance, int transaction) {

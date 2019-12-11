@@ -1,5 +1,7 @@
+import java.io.Serializable;
+
 //class to set account info
-public class Account {
+public class Account implements Serializable {
     protected Customer customer;
     protected int accountNumber;
     protected float balance;

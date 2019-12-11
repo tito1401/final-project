@@ -1,4 +1,6 @@
-public class Regular extends Account {
+import java.io.Serializable;
+
+public class Regular extends Account implements Serializable {
 
 	
 	public Regular (Customer customer, int accountNumber, float balance, int transaction) {
