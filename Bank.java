@@ -22,6 +22,7 @@ public class Bank implements Serializable {
             int accountNumber = 0;
             float balance = 0;
             int transaction = 0;
+            String accountType = "Checking";
             
             customer = getCustomer();      
                                    
@@ -33,7 +34,7 @@ public class Bank implements Serializable {
        			accountNumber = input.nextInt();
             }
 
-            Checking checking = new Checking(customer, accountNumber, balance, transaction);
+            Checking checking = new Checking(customer, accountNumber, balance, transaction, accountType);
             return checking;
             }
     
@@ -43,6 +44,7 @@ public class Bank implements Serializable {
             int accountNumber = 0;
             float balance = 0;
             int transaction = 0;
+            String accountType = "Gold";
             
             customer = getCustomer();
                                                 
@@ -54,7 +56,7 @@ public class Bank implements Serializable {
        			accountNumber = input.nextInt();
             }
             
-            Gold gold = new Gold(customer, accountNumber, balance, transaction);
+            Gold gold = new Gold(customer, accountNumber, balance, transaction, accountType);
 
             return gold;
     }
@@ -65,6 +67,7 @@ public class Bank implements Serializable {
             int accountNumber;
             float balance = 0;
             int transaction = 0;
+            String accountType = "Regular";
             
             customer = getCustomer();
                         
@@ -76,7 +79,7 @@ public class Bank implements Serializable {
        			accountNumber = input.nextInt();
             }
             
-            Regular regular = new Regular (customer, accountNumber, balance, transaction);
+            Regular regular = new Regular (customer, accountNumber, balance, transaction, accountType);
 
             
             return regular;
@@ -108,8 +111,8 @@ public class Bank implements Serializable {
         //declare variables
         float averageBalance = 0;
         int emptyAccount = 0;
-        String largestBalance = "";
-        int j = 0;
+        float largestBalance = 0;
+        String bigAccount = "";
 
         System.out.println("Total sum of all accounts: " + arrayList.size());
 
@@ -127,26 +130,16 @@ public class Bank implements Serializable {
         averageBalance /= arrayList.size();
         System.out.println("Average balance of accounts: " + averageBalance);
 
-
-        //move largest account holder to top of array
-        for (int i = 0; i < arrayList.size(); i++) {
-
-            for (j = i + 1; j < arrayList.size(); j++) {
-
-                if (arrayList.get(i).balance > arrayList.get(j).balance) {
-                    Account k = arrayList.get(i);
-                    arrayList.set(i, arrayList.get(j));
-                    arrayList.set(j, k);
-                }
-            }
+       //display largest account holder
+        for (int i = 0; i < arrayList.size(); i++ ) {
+        	if (arrayList.get(i).balance > largestBalance) {
+        		largestBalance = arrayList.get(i).balance;
+        		bigAccount = arrayList.get(i).customer.name;
+        	}
         }
-
-        //display largest account holder
-        //largestBalance = arrayList.get(arrayList.size() - 1).Customer.name;
-        //System.out.println("The account with largest balance: " + largestBalance);
-
-    }
-
+        	System.out.println("Account Holder with largest balance: ");	
+        	System.out.println(bigAccount);
+     }
 
     //method to find accounts based on account number
     public Account find(int accountNO) {
@@ -259,7 +252,7 @@ public class Bank implements Serializable {
         		}
 
         do {
-            System.out.println("     BANK MENU\n"
+            System.out.println("\n" + "     BANK MENU\n"
                     + "=========================\n"
                     + "1.Create a Checking account\n"
                     + "2.Create a Gold account\n"
@@ -331,7 +324,7 @@ public class Bank implements Serializable {
                 		System.out.println("/nAccount number not found"); }
                 	else {
                 		bankOperator.arrayList.remove(acc);
-                        System.out.println("Bank account removed");
+                        System.out.println("Bank account removed" + "\n");
                 	}
                     break;
 
@@ -344,7 +337,7 @@ public class Bank implements Serializable {
                         account.transaction = 0;
                     });
 
-                    System.out.println("All accounts updated successfully");
+                    System.out.println("All accounts updated successfully" + "\n");
 
                     break;
 
@@ -363,7 +356,7 @@ public class Bank implements Serializable {
 			out.close();
 		}
 		catch (Exception e) {
-			System.out.println("Unable to bank information");
+			System.out.println("Unable to save bank information");
 			System.out.println( e.getMessage() );
 			e.printStackTrace();
 			System.exit(0);

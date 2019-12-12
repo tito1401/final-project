@@ -7,13 +7,15 @@ public class Account implements Serializable {
     protected float balance;
     protected int transaction;
     protected float monthlyEnd;
+    protected String accountType;
 
     //getter so account info can be referenced elsewhere
-    public Account(Customer customer, int accountNumber, float balance, int transaction) {
+    public Account(Customer customer, int accountNumber, float balance, int transaction, String accountType) {
         this.customer = customer;
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.transaction = transaction;
+        this.accountType = accountType;
     }
 
     //setters for attributes
@@ -32,6 +34,9 @@ public class Account implements Serializable {
     public void setCustomer ( Customer customer ) {
     	this.customer = customer;
     }
+    public void setAccountType ( String accountType) {
+    	this.accountType = accountType;
+    }
     
     //getters for attributes
     public int getAccountNumber() {
@@ -48,6 +53,9 @@ public class Account implements Serializable {
     }
     public Customer getCustomer() {
     	return customer;
+    }
+    public String getAccountType() {
+    	return accountType;
     }
     
 }
