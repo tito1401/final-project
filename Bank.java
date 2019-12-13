@@ -63,7 +63,8 @@ public class Bank implements Serializable {
 				accountNumber = input.nextInt();
 			}
 		} catch (java.util.InputMismatchException m) {
-			System.out.println("\nInvalid input. Please enter a valid integer: ");
+			System.out.println("\nInvalid entry. \nPlease note that menu selections, customer IDs and account numbers must be entered as integer values. "
+							+ "\nDeposit and withdraw amounts must be entered as integer or double values (EX: 100 or 100.00).");
 		}
 
 		Gold gold = new Gold(customer, accountNumber, balance, transaction, accountType);
@@ -90,7 +91,8 @@ public class Bank implements Serializable {
 				accountNumber = input.nextInt();
 			}
 		} catch (java.util.InputMismatchException m) {
-			System.out.println("\nInvalid input. Please enter a valid integer: ");
+			System.out.println("\nInvalid entry. \nPlease note that menu selections, customer IDs and account numbers must be entered as integer values. "
+							+ "\nDeposit and withdraw amounts must be entered as integer or double values (EX: 100 or 100.00).");
 		}
 
 		Regular regular = new Regular(customer, accountNumber, balance, transaction, accountType);
