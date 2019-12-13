@@ -175,7 +175,7 @@ public class Bank implements Serializable {
 		return false;
 	}
 
-	// method to add deposit
+	// method to add deposit, loop for catching simple input error 
 	void addDeposit() {
 		Account acc;
 		int accountNO = searchAccount();
@@ -185,13 +185,17 @@ public class Bank implements Serializable {
 		} else {
 			System.out.println("Enter amount to deposit: $");
 			float deposit = input.nextFloat();
+			while (deposit < 0) {
+				System.out.println("Positive amounts only for deposits.");
+				deposit = input.nextFloat();
+			}
 			acc.balance += deposit;
 			acc.transaction += 1;
 			System.out.println("Account updated.");
 		}
 	}
 
-	// method to withdraw
+	// method to withdraw, loop for catching simple input error
 	void subWithdraw() {
 		Account acc;
 		int accountNO = searchAccount();
@@ -202,10 +206,18 @@ public class Bank implements Serializable {
 		if (acc instanceof Gold) {
 			System.out.println("Enter amount to withdraw: $");
 			float withdraw = input.nextFloat();
+			while (withdraw < 0) {
+				System.out.println("Positive amounts only for withdraws.");
+				withdraw = input.nextFloat();
+			}
 			acc.balance -= withdraw;
 		} else {
 			System.out.println("Enter amount to withdraw: $");
 			float withdraw = input.nextFloat();
+			while (withdraw < 0) {
+				System.out.println("Positive amounts only for withdraws.");
+				withdraw = input.nextFloat();
+			}
 			if (withdraw <= acc.balance) {
 				acc.balance -= withdraw;
 			} else {
