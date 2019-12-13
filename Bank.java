@@ -34,8 +34,7 @@ public class Bank implements Serializable {
 				accountNumber = input.nextInt();
 			}
 		} catch (java.util.InputMismatchException m) {
-			System.out.println(
-					"\nInvalid entry. \nPlease note that menu selections, customer IDs and account numbers must be entered as integer values. "
+			System.out.println("\nInvalid entry. \nPlease note that menu selections, customer IDs and account numbers must be entered as integer values. "
 							+ "\nDeposit and withdraw amounts must be entered as integer or double values (EX: 100 or 100.00).");
 		}
 
