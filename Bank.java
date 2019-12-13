@@ -345,8 +345,7 @@ public class Bank implements Serializable {
 					break;
 
 				default:
-					System.out
-							.println("\nInvalid entry. Please ensure that your selection is an integer from 1 to 10.");
+					System.out.println("\nInvalid entry. Please ensure that your selection is an integer from 1 to 10.");
 				}
 
 			} catch (java.util.InputMismatchException m) {
