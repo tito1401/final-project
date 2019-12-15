@@ -198,16 +198,16 @@ public class BankPOSMain extends Application {
             bank.getArrayList().add(checking);
             if (checking != null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
-                alert.setContentText("Account Created Successfully");
+                alert.setContentText("Account Created Successfully!");
                 alert.showAndWait();
                 textField1.setText("");
                 textField2.setText("");
 
             } else {
                 Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
+                alert1.setTitle("Information dialogue");
                 alert1.setHeaderText("This account number is already taken.");
                 alert1.setContentText("Enter a different account number!");
 
@@ -274,9 +274,9 @@ public class BankPOSMain extends Application {
             bank.getArrayList().add(gold);
             if (gold != null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
-                alert.setContentText("Account Created Successfully");
+                alert.setContentText("Account Created Successfully!");
 
                 alert.showAndWait();
                 textField1.setText("");
@@ -284,7 +284,7 @@ public class BankPOSMain extends Application {
                 textField3.setText("");
             } else {
                 Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
+                alert1.setTitle("Information Dialogue");
                 alert1.setHeaderText("This account number is already taken.");
                 alert1.setContentText("Enter a different account number!");
 
@@ -352,7 +352,7 @@ public class BankPOSMain extends Application {
             bank.getArrayList().add(regular);
             if (regular != null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account Created Successfully");
 
@@ -362,7 +362,7 @@ public class BankPOSMain extends Application {
                 textField3.setText("");
             } else {
                 Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
+                alert1.setTitle("Information dialogue");
                 alert1.setHeaderText("This account number is already taken.");
                 alert1.setContentText("Enter a different account number!");
 
@@ -424,7 +424,7 @@ public class BankPOSMain extends Application {
             if (bank.addDeposit(accountNumber, deposit)) {
                 System.out.println("true");
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Amount Deposited Successfully");
                 alert.showAndWait();
@@ -493,7 +493,7 @@ public class BankPOSMain extends Application {
             Boolean flag = bank.subWithdraw(accountNumber, widthdraw);
             if (flag == true) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Amount Withdrawn Successfully");
                 alert.showAndWait();
@@ -589,7 +589,7 @@ public class BankPOSMain extends Application {
             acc = bank.find(accountNumber);
             if (acc == null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account number not found");
                 alert.showAndWait();
@@ -607,7 +607,7 @@ public class BankPOSMain extends Application {
                     table.setItems(data);
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Dialog");
+                    alert.setTitle("Information dialogue");
                     alert.setHeaderText(null);
                     alert.setContentText("Account number not found");
                     alert.showAndWait();
@@ -658,7 +658,7 @@ public class BankPOSMain extends Application {
             acc = bank.find(accountNumber);
             if (acc == null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account number not found");
                 alert.showAndWait();
@@ -667,7 +667,7 @@ public class BankPOSMain extends Application {
 
                 bank.getArrayList().remove(acc);
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account removed Successfully");
                 alert.showAndWait();
