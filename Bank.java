@@ -111,6 +111,7 @@ java.util.InputMismatchException {
  ArrayList displayBankStatistics() {
      
  // declare variables
+     float totalSum = 0;
  float averageBalance = 0;
  int emptyAccount = 0;
  float largestBalance = 0;
@@ -118,8 +119,11 @@ java.util.InputMismatchException {
  
  ArrayList<String> list = new ArrayList<String>();
 
+ for (int i = 0; i < arrayList.size(); i++) {
+     totalSum += arrayList.get(i).balance;
+     }
  System.out.println("Total sum of all accounts: " + arrayList.size());
- list.add(Integer.toString(arrayList.size()));
+ list.add(Float.toString(totalSum));
  for (int i = 0; i < arrayList.size(); i++) {
  if (arrayList.get(i).balance == 0) {
  emptyAccount++;
