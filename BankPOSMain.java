@@ -1,20 +1,35 @@
+import java.awt.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.*;
-import java.util.ArrayList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert.AlertType;
 
 public class BankPOSMain extends Application {
     static Bank bank = new Bank();
@@ -38,7 +53,7 @@ public class BankPOSMain extends Application {
             try {
                 ObjectInputStream in = new ObjectInputStream(new
                         FileInputStream(f));
-                // Read the objects from the file back to the array list
+                // Read objects from the file back to the array list
                 bank.arrayList = (ArrayList<Account>) in.readObject();
                 in.close();
             } catch (Exception e) {
@@ -47,7 +62,7 @@ public class BankPOSMain extends Application {
                 System.exit(0);
             }
             try {
-                // Create the file then save all employee records into it
+                // Create the file then save all employee records to it
                 ObjectOutputStream out = new ObjectOutputStream(new
                         FileOutputStream(f));
                 out.writeObject(bank.arrayList);
@@ -74,14 +89,14 @@ public class BankPOSMain extends Application {
 
     public void mainWindow(Stage primaryStage) {
         primaryStage.setTitle("Bank System"); //set stage title
-        createChecking = new Button("Create a Checking account");
-        createGold = new Button("Create a Gold Account");
-        regularAccount = new Button("Create a Regular Account");
+        createChecking = new Button("Create Checking account");
+        createGold = new Button("Create Gold Account");
+        regularAccount = new Button("Create Regular Account");
         deposit = new Button("Deposit");
         withdraw = new Button("Withdraw");
         displayAccountInfo = new Button("Display Account Info");
         removeAnAccount = new Button("Remove An Account");
-        endOfMonth = new Button("Apply End Of Month <Interest/Fees>");
+        endOfMonth = new Button("Apply end ef month <Interest/Fees>");
         displayBankStatics = new Button("Display Bank Statistics");
         exit = new Button("Exit");
 
@@ -149,32 +164,32 @@ public class BankPOSMain extends Application {
     public void createCheckingAccount(Stage primaryStage) {
 
 
-        //creating label
+        //create label
         Text text1 = new Text("Customer Name: ");
 
-        //creating label
+        //create label
         Text text2 = new Text("Customer ID: ");
 
         Text text3 = new Text("Account Number: ");
 
 
-        //Creating Text Filed for customer name
+        //Create text field for customer name
         TextField textField1 = new TextField();
 
-        //Creating Text Filed for customer id
+        //Create text field for customer id
         TextField textField2 = new TextField();
 
 
         TextField textField3 = new TextField();
 
-        //Creating Buttons
+        //Create buttons
         Button button1 = new Button("Create Account");
         Button button2 = new Button("Back");
 
-        //Creating a Grid Pane
+        //Create a Grid Pane
         GridPane gridPane = new GridPane();
 
-        //Arranging all the nodes in the grid
+        //Arrange all the nodes in the grid
         gridPane.add(text1, 0, 0);
         gridPane.add(textField1, 1, 0);
         gridPane.add(text2, 0, 1);
@@ -198,7 +213,7 @@ public class BankPOSMain extends Application {
             bank.getArrayList().add(checking);
             if (checking != null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account Created Successfully");
                 alert.showAndWait();
@@ -207,7 +222,7 @@ public class BankPOSMain extends Application {
 
             } else {
                 Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
+                alert1.setTitle("Information dialogue");
                 alert1.setHeaderText("This account number is already taken.");
                 alert1.setContentText("Enter a different account number!");
 
@@ -223,22 +238,22 @@ public class BankPOSMain extends Application {
     }
 
     public void createGoldAccount(Stage primaryStage) {
-        //creating label
+        //create label
         Text text1 = new Text("Customer Name: ");
 
-        //creating label
+        //create label
         Text text2 = new Text("Customer ID: ");
 
         Text text3 = new Text("Account Number: ");
 
 
-        //Creating Text Filed for customer name
+        //Create text field for customer name
         TextField textField1 = new TextField();
 
-        //Creating Text Filed for customer id
+        //Create text field for customer id
         TextField textField2 = new TextField();
 
-        //Creating Text Filed for Account Number
+        //Create text field for Account Number
         TextField textField3 = new TextField();
 
         //Creating Buttons
@@ -274,7 +289,7 @@ public class BankPOSMain extends Application {
             bank.getArrayList().add(gold);
             if (gold != null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account Created Successfully");
 
@@ -284,7 +299,7 @@ public class BankPOSMain extends Application {
                 textField3.setText("");
             } else {
                 Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
+                alert1.setTitle("Information dialogue");
                 alert1.setHeaderText("This account number is already taken.");
                 alert1.setContentText("Enter a different account number!");
 
@@ -310,24 +325,24 @@ public class BankPOSMain extends Application {
         Text text3 = new Text("Account Number: ");
 
 
-        //Creating Text Filed for customer name
+        //Creating text field for customer name
         TextField textField1 = new TextField();
 
-        //Creating Text Filed for customer id
+        //Creating text field for customer id
         TextField textField2 = new TextField();
 
-        //Creating Text Filed for Account Number
+        //Creating text field for Account Number
         TextField textField3 = new TextField();
 
-        //Creating Buttons
+        //Create buttons
         Button button1 = new Button("Create Account");
         Button button2 = new Button("Back");
 
-        //Creating a Grid Pane
+        //Create a Grid Pane
         GridPane gridPane = new GridPane();
 
 
-        //Arranging all the nodes in the grid
+        //Arrange all the nodes in the grid
         gridPane.add(text1, 0, 0);
         gridPane.add(textField1, 1, 0);
         gridPane.add(text2, 0, 1);
@@ -352,7 +367,7 @@ public class BankPOSMain extends Application {
             bank.getArrayList().add(regular);
             if (regular != null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account Created Successfully");
 
@@ -362,7 +377,7 @@ public class BankPOSMain extends Application {
                 textField3.setText("");
             } else {
                 Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
+                alert1.setTitle("Information dialogue");
                 alert1.setHeaderText("This account number is already taken.");
                 alert1.setContentText("Enter a different account number!");
 
@@ -380,28 +395,28 @@ public class BankPOSMain extends Application {
 
     public void deposit(Stage primaryStage) {
 
-        //creating label
-        Text text1 = new Text("Customer Account Number :");
+        //create label
+        Text text1 = new Text("Customer Account Number: ");
 
-        //creating label
-        Text text2 = new Text("Deposit Amount $ :");
+        //create label
+        Text text2 = new Text("Deposit Amount: $");
 
 
-        //Creating Text Filed for Customer Account Number
+        //Create Text field for Customer Account Number
         TextField textField1 = new TextField();
 
-        //Creating Text Filed for Deposit Amount
+        //Creating Text field for Deposit Amount
         TextField textField2 = new TextField();
 
 
-        //Creating Buttons
+        //Create Buttons
         Button button12 = new Button("Deposit");
         Button button2 = new Button("Back");
 
-        //Creating a Grid Pane
+        //Create a Grid Pane
         GridPane gridPane = new GridPane();
 
-        //Arranging all the nodes in the grid
+        //Arrange all the nodes in the grid
         gridPane.add(text1, 0, 0);
         gridPane.add(textField1, 1, 0);
         gridPane.add(text2, 0, 1);
@@ -424,9 +439,9 @@ public class BankPOSMain extends Application {
             if (bank.addDeposit(accountNumber, deposit)) {
                 System.out.println("true");
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
-                alert.setContentText("Amount Deposited Successfully");
+                alert.setContentText("Account updated successfully!");
                 alert.showAndWait();
                 textField1.setText("");
                 textField2.setText("");
@@ -436,7 +451,7 @@ public class BankPOSMain extends Application {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid Account Number");
-                alert.setContentText("Please Try with a valid account number!");
+                alert.setContentText("Account number not found!");
                 alert.showAndWait();
                 textField1.setText("");
                 textField2.setText("");
@@ -450,28 +465,28 @@ public class BankPOSMain extends Application {
     }
 
     public void withdraw(Stage primaryStage) {
-        //creating label
+        //create label
         Text text1 = new Text("Customer Account Number :");
 
-        //creating label
-        Text text2 = new Text("Withdraw Amount $ :");
+        //create label
+        Text text2 = new Text("Withdraw Amount: $");
 
 
-        //Creating Text Filed for Customer Account Number
+        //Create Text field for Customer Account Number
         TextField textField1 = new TextField();
 
-        //Creating Text Filed for Withdraw  Amount
+        //Create Text field for Withdraw  Amount
         TextField textField2 = new TextField();
 
 
-        //Creating Buttons
+        //Create Buttons
         Button button1 = new Button("Widthdraw");
         Button button2 = new Button("Back");
 
         //Creating a Grid Pane
         GridPane gridPane = new GridPane();
 
-        //Arranging all the nodes in the grid
+        //Arrange all the nodes in the grid
         gridPane.add(text1, 0, 0);
         gridPane.add(textField1, 1, 0);
         gridPane.add(text2, 0, 1);
@@ -493,9 +508,9 @@ public class BankPOSMain extends Application {
             Boolean flag = bank.subWithdraw(accountNumber, widthdraw);
             if (flag == true) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
-                alert.setContentText("Amount Withdrawn Successfully");
+                alert.setContentText("Account updated successfully!");
                 alert.showAndWait();
                 textField1.setText("");
                 textField2.setText("");
@@ -503,7 +518,7 @@ public class BankPOSMain extends Application {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid Account Number");
-                alert.setContentText("Please Try with a valid account number!");
+                alert.setContentText("Account number not found!");
                 alert.showAndWait();
                 textField1.setText("");
                 textField2.setText("");
@@ -517,13 +532,13 @@ public class BankPOSMain extends Application {
     }
 
     public void displayAccountInfo(Stage primaryStage) {
-        //creating label
+        //create label
         Text text1 = new Text("Account Number :");
 
 
         Text txt = new Text("");
 
-        //Creating Text Filed for  Account Number
+        //Create text field for  account number
         TextField textField1 = new TextField();
 
         TableView<Account> table = new TableView<Account>();
@@ -559,14 +574,14 @@ public class BankPOSMain extends Application {
                 new PropertyValueFactory<Account, Float>("accountType"));
 
         table.getColumns().addAll(Customer, AccountNumber, Balance, transaction, accountType);
-        //Creating Buttons
+        //Create Buttons
         Button button1 = new Button("Display Information");
         Button button2 = new Button("Back");
 
-        //Creating a Grid Pane
+        //Create a Grid Pane
         GridPane gridPane = new GridPane();
 
-        //Arranging all the nodes in the grid
+        //Arrange all the nodes in the grid
         gridPane.add(text1, 0, 0);
         gridPane.add(textField1, 1, 0);
         gridPane.add(button1, 0, 3);
@@ -589,9 +604,9 @@ public class BankPOSMain extends Application {
             acc = bank.find(accountNumber);
             if (acc == null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
-                alert.setContentText("Account number not found");
+                alert.setContentText("Account number not found!");
                 alert.showAndWait();
                 textField1.setText("");
 
@@ -607,7 +622,7 @@ public class BankPOSMain extends Application {
                     table.setItems(data);
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Dialog");
+                    alert.setTitle("Information dialogue");
                     alert.setHeaderText(null);
                     alert.setContentText("Account number not found");
                     alert.showAndWait();
@@ -623,22 +638,22 @@ public class BankPOSMain extends Application {
     }
 
     public void removeAnAccount(Stage primaryStage) {
-        //creating label
+        //create label
         Text text1 = new Text("Account Number :");
 
 
-        //Creating Text Filed for  Account Number
+        //Create Text field for account number
         TextField textField1 = new TextField();
 
 
-        //Creating Buttons
+        //Create buttons
         Button button1 = new Button("Remove Account");
         Button button2 = new Button("Back");
 
-        //Creating a Grid Pane
+        //Create a Grid Pane
         GridPane gridPane = new GridPane();
 
-        //Arranging all the nodes in the grid
+        //Arrange all the nodes in the grid
         gridPane.add(text1, 0, 0);
         gridPane.add(textField1, 1, 0);
         gridPane.add(button1, 0, 3);
@@ -658,7 +673,7 @@ public class BankPOSMain extends Application {
             acc = bank.find(accountNumber);
             if (acc == null) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account number not found");
                 alert.showAndWait();
@@ -667,7 +682,7 @@ public class BankPOSMain extends Application {
 
                 bank.getArrayList().remove(acc);
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("Information dialogue");
                 alert.setHeaderText(null);
                 alert.setContentText("Account removed Successfully");
                 alert.showAndWait();
@@ -728,10 +743,10 @@ public class BankPOSMain extends Application {
         Text label = new Text("Bank Statistics");
         label.setFont(new Font("Arial", 20));
 
-        Text text1 = new Text("Total Accounts :");
-        Text text2 = new Text("Average Balance :");
-        Text text3 = new Text("Empty Accounts :");
-        Text text4 = new Text("Account with the largest balance:");
+        Text text1 = new Text("Total Bank Balance: ");
+        Text text2 = new Text("Average Balance: ");
+        Text text3 = new Text("Empty Accounts: ");
+        Text text4 = new Text("Big Account: ");
 
         Text totalAccount = new Text("");
         Text averageBalance = new Text("");
@@ -740,10 +755,10 @@ public class BankPOSMain extends Application {
 
         Button button2 = new Button("Back");
 
-        //Creating a Grid Pane
+        //Create a Grid Pane
         GridPane gridPane = new GridPane();
 
-        //Arranging all the nodes in the grid
+        //Arrange all the nodes in the grid
         gridPane.add(label, 0, 0);
         gridPane.add(text1, 0, 1);
         gridPane.add(totalAccount, 1, 1);
