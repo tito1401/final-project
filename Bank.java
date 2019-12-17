@@ -203,15 +203,17 @@ public class Bank implements Serializable {
 		if (acc == null) {
 			System.out.println("Account number not found. ");
 		}
-		if (acc instanceof Gold) {
+		else {
+			if (acc instanceof Gold) {
 			System.out.println("Enter amount to withdraw: $");
 			float withdraw = input.nextFloat();
 			while (withdraw < 0) {
 				System.out.println("Positive amounts only for withdraws.");
 				withdraw = input.nextFloat();
-			}
+				}
 			acc.balance -= withdraw;
-		} else {
+		} 
+		else {
 			System.out.println("Enter amount to withdraw: $");
 			float withdraw = input.nextFloat();
 			while (withdraw < 0) {
@@ -227,6 +229,7 @@ public class Bank implements Serializable {
 		}
 		acc.transaction += 1;
 		System.out.println("Account updated. ");
+		}
 	}
 
 	// method to input customer account number for searching purposes
