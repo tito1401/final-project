@@ -18,5 +18,4 @@ Challenges encountered:
 2) JavaFX. This has been a huge issue. No one in our group has been able to get JavaFX to work in Eclipse. Two of us have been able to get it to work in IntelliJ, one of us has gotten it to work in NetBeans, and the other two have still not been able to get it to work.
 
 Known bugs/issues:
-1) When running the text-only version of the program in the console, if you enter 10 at the main menu to exit the program, it displays the message "Invalid entry. Please ensure that your selection is an integer from 1 to 10" although it then does exit the program.
-2) When running the text-only version of the program, when you try to withdraw and give it an account number that doesn't exist it does give you an "Account number not found." message, but then it goes on to prompt you "Enter amount to withdraw: $" and no matter what you input there it crashes the program and throws a null pointer exception, presumably for obvious reasons. It does not do this if you try to make a deposit but give an account number that doesn't exist.
+1) When running the text-only version of the program in the console, if you enter 10 at the main menu to exit the program, it displays the message "Invalid entry. Please ensure that your selection is an integer from 1 to 10" although it then does exit the program. This problem was fixed for the GUI version of the program.
